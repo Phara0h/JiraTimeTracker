@@ -1,4 +1,4 @@
-Jira-Time-Tracker
+Jira Time Tracker (JiraJS)
 =================
 
 A free, easy to use command line to keep track of your time and have it automatically log the time spent on tasks.

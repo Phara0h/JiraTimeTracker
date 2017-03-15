@@ -1,0 +1,17 @@
+{
+  "name": "jira-time-tracker",
+  "version": "1.0.0",
+  "description": "Jira Time Tracker (JiraJS) =================",
+  "main": "jira.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jt Whissel",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^1.4.1",
+    "colors": "^1.1.2",
+    "prompt": "^1.0.0",
+    "zombie": "^5.0.5"
+  }
+}

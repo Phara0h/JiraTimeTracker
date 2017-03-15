@@ -1,12 +1,15 @@
 var Browser = require("zombie");
 var assert = require("assert");
 var prompt = require('prompt');
+var colors = require('colors');
+
 prompt.message = "JiraJS".cyan;
 prompt.delimiter = ":".green;
 
-browser = new Browser({runScripts: false, loadCSS: false, waitDuration: '30s' })
+browser = new Browser({runScripts: true, loadCSS: false, waitDuration: '30s' })
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-var jiraURL = "https://devmgmt.national.aaa.com/jira/"; // CHANGE THIS TO YOUR JIRA URL
+var jiraURL = "https://ideorl-vstts.ideorlando.org/"; // CHANGE THIS TO YOUR JIRA URL
 var startedWork = new Array();
 
 console.log("      _ _               _ ____   ".cyan);
@@ -39,7 +42,7 @@ function promptLogin()
 function login(user, password)
 {
 	browser.visit(jiraURL+'login.jsp', function () {
-		
+
 			browser.fill("os_username", user).
 			fill("os_password", password).
 			pressButton("Log In", function() {
@@ -55,8 +58,8 @@ function login(user, password)
 				 promptCMD();
 			  }
 			})
-		
-		
+
+
 
 	});
 }
@@ -90,28 +93,18 @@ function promptCMD()
 
 
 function startWork(jiraNumber)
-{	
+{
 	browser.visit(jiraURL+"browse/"+jiraNumber, function () {
-		if(browser.query("#action_id_4"))
+		if(browser.query("#login-form-submit"))
 		{
-			browser.clickLink("#action_id_4",function() {
-				console.log("Started Work on "+jiraNumber.green);
-				startedWork[jiraNumber] = {start: new Date()}
-				promptCMD();
-			});
+			console.log("Ooops, looks like you were logged out. Please login again.".red)
+			promptLogin();
 		}
 		else
 		{
-			if(browser.query("#login-form-submit"))
-			{
-				console.log("Ooops, looks like you were logged out. Please login again.".red)
-				promptLogin();
-			}
-			else
-			{
-				console.log("You must stop work before you can start work".red);
-				promptCMD();
-			}
+			console.log("Started Work on "+jiraNumber.green);
+			startedWork[jiraNumber] = {start: new Date()}
+			promptCMD();
 		}
 	});
 }
@@ -120,36 +113,24 @@ function stopWork(jiraNumber, comment)
 {
 	if(startedWork[jiraNumber] != null)
 	{
-		var totalTime = Math.ceil((((new Date() - startedWork[jiraNumber].start)/1000)/60)/60); // this rounds up to the nearest hour.  
+		var totalTime = Math.ceil((((new Date() - startedWork[jiraNumber].start)/1000)/60)/60); // this rounds up to the nearest hour.
 			browser.visit(jiraURL+"browse/"+jiraNumber, function () {
-			if(browser.query("#action_id_301"))
+			if(browser.query("#log-work-link"))
 			{
-				browser.clickLink("#action_id_301",function(){
-					browser.clickLink("#log-work-link", function(){
-						browser.fill("timeLogged",totalTime+"h").
-									fill("comment",comment).
-									pressButton("Log",function() {
-											console.log("You worked for "+(totalTime).toString().green+" hours"+" on "+jiraNumber.green);
-											startedWork[jiraNumber] = null;
-											promptCMD();
-									})
-						})
-				})
-				
+				browser.clickLink("#log-work-link", function(){
+					browser.fill("timeLogged",totalTime+"h").
+								fill("comment",comment).
+								pressButton("Log",function() {
+										console.log("You worked for "+(totalTime).toString().green+" hours"+" on "+jiraNumber.green);
+										startedWork[jiraNumber] = null;
+										promptCMD();
+								})
+					})
 			}
-			else
+			else if (browser.query("#login-form-submit"))
 			{
-				if(browser.query("#login-form-submit"))
-				{
-					console.log("Ooops, looks like you were logged out. Please login again.".red)
-					promptLogin();
-				}
-				else
-				{
-					console.log(browser);
-					console.log("You must start work before you can stop work".red);
-					promptCMD();
-				}
+				console.log("Ooops, looks like you were logged out. Please login again.".red)
+				promptLogin();
 			}
 		})
 	}

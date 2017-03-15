@@ -24,7 +24,7 @@
     "jtt": "./jira",
     "JiraTimeTracker": "./jira"
   },
-  "preferGlobal": "true"
+  "preferGlobal": "true",
   "dependencies": {
     "assert": "^1.4.1",
     "colors": "^1.1.2",

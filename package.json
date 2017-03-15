@@ -1,13 +1,30 @@
 {
   "name": "jira-time-tracker",
   "version": "1.0.0",
-  "description": "Jira Time Tracker (JiraJS) =================",
-  "main": "jira.js",
+  "description": "A command line Jira time tracker",
+  "main" : "./jira",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./jira"
   },
   "author": "Jt Whissel",
-  "license": "ISC",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "email": "jtwhissel@gmail.com",
+      "name": "Phara0h"
+    }
+  ],
+  "keywords":["jira","time", "tracker", "command", "line"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phara0h/JiraTimeTracker.git"
+  },
+  "bin": {
+    "jira": "./jira",
+    "jtt": "./jira",
+    "JiraTimeTracker": "./jira"
+  },
+  "preferGlobal": "true"
   "dependencies": {
     "assert": "^1.4.1",
     "colors": "^1.1.2",

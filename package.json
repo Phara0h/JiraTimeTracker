@@ -1,10 +1,10 @@
 {
   "name": "jira-time-tracker",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A command line Jira time tracker",
-  "main" : "./bin/jira",
+  "main" : "./jira",
   "scripts": {
-    "start": "node ./bin/jira"
+    "start": "node ./jira"
   },
   "author": "Jt Whissel",
   "license": "MIT",
@@ -20,9 +20,9 @@
     "url": "git+https://github.com/Phara0h/JiraTimeTracker.git"
   },
   "bin": {
-    "jira": "./bin/jira",
-    "jtt": "./bin/jira",
-    "JiraTimeTracker": "./bin/jira"
+    "jira": "./jira",
+    "jtt": "./jira",
+    "JiraTimeTracker": "./jira"
   },
   "preferGlobal": "true",
   "dependencies": {

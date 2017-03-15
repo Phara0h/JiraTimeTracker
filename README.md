@@ -10,9 +10,9 @@ How To Use
 
 1. install node.js (www.nodejs.org)
 2. cd to the folder
-3. open up bin/jira in text editor
+3. open up jira in text editor
 4. edit line 9 to your jira url, save & exit the file
-5. type "node bin/jira"
+5. type "node jira"
 6. login
 7. type "start" to start working on a task
 8. enter the task key (EX: TASK-1234)

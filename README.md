@@ -3,6 +3,8 @@ Jira Time Tracker (JiraJS)
 
 A free, easy to use command line to keep track of your time and have it automatically log the time spent on tasks.
 
+P.S This code is still really bad thrown together out of pure hate of dealing with logging time in jira. 
+
 How To Use
 =================
 

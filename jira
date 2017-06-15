@@ -11,7 +11,7 @@ prompt.delimiter = ":".green;
 browser = new Browser({runScripts: true, loadCSS: false, waitDuration: '30s' })
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
-var jiraURL = "https://ideorl-vstts.ideorlando.org/"; // CHANGE THIS TO YOUR JIRA URL
+var jiraURL = "https://jira.com/"; // CHANGE THIS TO YOUR JIRA URL
 var startedWork = new Array();
 
 console.log("      _ _               _ ____   ".cyan);
